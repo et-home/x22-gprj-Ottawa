@@ -15,7 +15,7 @@ DataCache.checkDataAge = async () => {
         if (updateResult.status === "success") return { "status": "ready" };
     }
     else {
-        return { "status": "ready" };
+        return { "status": "ready" }; //data is still usable, no update needed
     }
 
     // return { "status": "ready" }
@@ -35,16 +35,10 @@ async function updateDb() {
     const query1 = "https://maps.ottawa.ca/arcgis/rest/services/Parks_Inventory/MapServer/15/query?where=1%3D1&outFields=*&resultOffset=0&resultRecordCount=1000&f=geojson";
     const query2 = "https://maps.ottawa.ca/arcgis/rest/services/Parks_Inventory/MapServer/15/query?where=1%3D1&outFields=*&resultOffset=1000&resultRecordCount=2000&f=geojson";
 
-    // INSERT INTO `ottawa`.`playarea` (`playareas`) VALUES ('b');
-
     queryResult1 = (await axios.get(query1)).data.features;
     queryResult2 = (await axios.get(query2)).data.features;
 
-
-    // console.log(queryResult1);
-    // console.log(queryResult2);
     results = [...queryResult1, ...queryResult2];
-    // console.log(results);
 
     try {
         let dbConn = await dbcPool.getConnection();
@@ -58,6 +52,5 @@ async function updateDb() {
 
     }
 }
-
 
 module.exports = DataCache;
