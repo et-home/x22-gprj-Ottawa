@@ -1,9 +1,11 @@
-var express = require("express");
-var router = express.Router();
-
+const express = require("express");
+const router = express.Router();
+const DataCache = require("../model/cache");
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
+router.get("/", async function (req, res, next) {
+  let checkResult = await DataCache.checkDataAge();
+  console.log(checkResult.status);
   res.send();
 });
 
