@@ -8,7 +8,7 @@ DataCache.checkDataAge = async () => {
     let lastUpdateDate = await lastUpdate();
     let timeDiff = Math.floor((curDate - lastUpdateDate) / (1000 * 3600 * 24));
 
-    const updateInterval = 30; // define the updateInterval of database cashing;
+    const updateInterval = 30; // define the update interval (in number of days) of database cashing;
 
     if (timeDiff > updateInterval || lastUpdateDate == null) {
         let updateResult = await updateDb(); //call update function to update the database
@@ -22,9 +22,9 @@ DataCache.checkDataAge = async () => {
 }
 
 async function lastUpdate() {
-    // SELECT `licenseeId`,`first`,`last`,expiry from licensee ORDER BY expiry desc
+
     let dbConn = await dbcPool.getConnection();
-    const rows = await dbConn.query("SELECT lastUpdated FROM playarea LIMIT 1");
+    const rows = await dbConn.query("SELECT playareas FROM playarea ORDER BY lastUpdated desc LIMIT 1"); //sort by last updated date in desc order and get the first result.
     dbConn.end();
     lastUpdated = rows.length == 0 ? null : rows[0].lastUpdated;
     return lastUpdated;

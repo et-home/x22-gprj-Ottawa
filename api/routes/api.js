@@ -3,19 +3,20 @@ const router = express.Router();
 const DataCache = require("../model/cache");
 const PlayAreas = require("../model/playarea");
 
-/* GET users listing. */
 router.get("/", async function (req, res, next) {
   let checkResult = await DataCache.checkDataAge();
 
+  let playareaList;
+
   if (checkResult.status === "ready") {
-    let playareaList = await PlayAreas.getList();
+    playareaList = await PlayAreas.getList();
   };
 
   res.send(playareaList);
 });
 
 
-// router.get("/options?:age_group&:climbing&:tire_swing&:swings_preschool_seats&:swings_belt_seats&:slides&:see_saw&:sand_box&:hopscotch&:playhouse&:spring_toy&:fencing&:accessible", async function (req, res, next) {
+// /options?:age_group&:climbing&:tire_swing&:swings_preschool_seats&:swings_belt_seats&:slides&:see_saw&:sand_box&:hopscotch&:playhouse&:spring_toy&:fencing&:accessible", 
 router.get("/options", async function (req, res, next) {
 
   let filters = req.query;
@@ -29,7 +30,7 @@ router.get("/options", async function (req, res, next) {
     return true;
   });
 
-  console.log(Object.keys(playareaList).length);
+  // console.log(Object.keys(playareaList).length);
   res.send(playareaList);
 });
 
