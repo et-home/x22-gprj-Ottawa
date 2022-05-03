@@ -48,6 +48,7 @@ async function updateDb() {
     }
     catch (err) {
         console.log(err);
+        dbConn.end();
         return { "status": "failed" };
 
     }
