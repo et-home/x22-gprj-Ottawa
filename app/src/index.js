@@ -2,14 +2,31 @@ import "./styles.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import layoutTemplate from "./hbs/layout.hbs";
+import filterTemplate from "./hbs/filter.hbs"
+import mapTemplate from "./hbs/map.hbs";
 
-import module from "./js/module";
+
+
+import Map from "./js/map";
 
 const appEl = document.getElementById("app");
-const siteInfo = { title: "Sample WebPack+Handlebars Frontend" };
+const siteInfo = { title: "Ottawa Playareas" };
 window.document.title = siteInfo.title;
 appEl.innerHTML = layoutTemplate(siteInfo);
 
-let init = function () {};
+const mapEl = document.getElementById("map-pane");
+const filterEl = document.getElementById("filter-pane");
+filterEl.innerHTML = filterTemplate();
+mapEl.innerHTML = mapTemplate();
+
+const queryUrl = "http://localhost:3000/api/";
+
+
+let init = function () {
+    Map.mapInit();
+};
+
+
+
 
 init();
