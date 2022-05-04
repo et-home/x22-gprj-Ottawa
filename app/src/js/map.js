@@ -5,6 +5,7 @@ import apiKey from "../../apikey";
 mapboxgl.accessToken = apiKey.access.apiKey;
 let Map = {};
 let displayMap;
+let marks = [];
 let defaultView = [-75.695000, 45.424721];
 
 
@@ -19,14 +20,26 @@ Map.mapInit = async function () {
 
 
 Map.marks = async function (list) {
+    let mark;
     list.forEach((coords) => {
-        new mapboxgl.Marker({
+        mark = new mapboxgl.Marker({
             color: "red",
         })
             .setLngLat(coords)
             .setPopup(new mapboxgl.Popup().setHTML("<h4>your friend is here</h4>"))
             .addTo(displayMap);
+        marks.push(mark)
+    });
+
+
+}
+
+Map.remove = async () => {
+    marks.forEach((mark) => {
+        mark.remove();
     })
+
+    marks = [];
 }
 
 export default Map;

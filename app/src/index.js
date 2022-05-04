@@ -22,9 +22,10 @@ mapEl.innerHTML = mapTemplate();
 const queryUrl = "http://localhost:3000/api/";
 
 let filters = [];
+let qString = "";
 
 
-let btnFilter = document.getElementById("filter").addEventListener("click", () => {
+document.getElementById("filter").addEventListener("click", async () => {
     // console.log("filter buttom clicked")
 
     let ageGroup = document.getElementById("age-group");
@@ -35,13 +36,17 @@ let btnFilter = document.getElementById("filter").addEventListener("click", () =
     for (let i = 0; i < allCheckbox.length; i++) {
         if (allCheckbox[i].checked) filters.push(allCheckbox[i].value);
     }
+    qString = queryString(filters);
+    let list = await getAllLocations(qString);
+    Map.remove();
+    Map.marks(list);
 
-    console.log(filters)
+    // console.log(filters)
     filters = [];
 });
 
 
-let btnClear = document.getElementById("clear").addEventListener("click", () => {
+document.getElementById("clear").addEventListener("click", () => {
     // console.log("clear buttom clicked")
     let allCheckbox = document.getElementsByClassName("form-check-input");
     for (let i = 0; i < allCheckbox.length; i++) {
@@ -51,22 +56,23 @@ let btnClear = document.getElementById("clear").addEventListener("click", () => 
 
 
 
-
-
 let init = async function () {
-    // Map.mapInit();
-    let list = await getAllLocations();
+    Map.mapInit();
+    let list = await getAllLocations(qString);
     // console.log(list);
-    // Map.marks(list);
+    Map.marks(list);
 };
 
 
+async function getAllLocations(qString) {
+    let response;
+    if (qString === "") {
+        response = await (await fetch(queryUrl)).json();
+    } else {
+        let queryString = queryUrl + "options" + qString;
+        response = await (await fetch(queryString)).json();
+    }
 
-
-
-
-async function getAllLocations() {
-    let response = await (await fetch(queryUrl)).json();
     let locationList = [];
 
     for (let i = 0; i < response.length; i++) {
@@ -76,6 +82,17 @@ async function getAllLocations() {
     return locationList;
 }
 
+function queryString(filters) {
+    let age_group = filters[0];
+    let restQueryString = "";
+    for (let i = 1; i < filters.length; i++) {
+        restQueryString += `&${filters[i]}=yes/oui`
+    }
+
+    let query = `?AGE_GROUP=${age_group}` + restQueryString;
+    // console.log(query);
+    return query;
+}
 
 
 init();
