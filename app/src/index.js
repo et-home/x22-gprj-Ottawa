@@ -6,7 +6,6 @@ import filterTemplate from "./hbs/filter.hbs"
 import mapTemplate from "./hbs/map.hbs";
 
 
-
 import Map from "./js/map";
 
 const appEl = document.getElementById("app");
@@ -22,10 +21,24 @@ mapEl.innerHTML = mapTemplate();
 const queryUrl = "http://localhost:3000/api/";
 
 
-let init = function () {
-    Map.mapInit();
+let init = async function () {
+    // Map.mapInit();
+    let list = await getAllLocations();
+    // console.log(list);
+    // Map.marks(list);
 };
 
+
+async function getAllLocations() {
+    let response = await (await fetch(queryUrl)).json();
+    let locationList = [];
+
+    for (let i = 0; i < response.length; i++) {
+        locationList.push(response[i].geometry.coordinates);
+    }
+
+    return locationList;
+}
 
 
 
