@@ -7,6 +7,6 @@ h1 {
 #map-pane {
   display: flex;
   flex-direction: column;
-  height: 60vh;
+  height: 70vh;
   background-color: antiquewhite;
 }

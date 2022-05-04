@@ -8,6 +8,7 @@ import mapTemplate from "./hbs/map.hbs";
 
 import Map from "./js/map";
 
+
 const appEl = document.getElementById("app");
 const siteInfo = { title: "Ottawa Playareas" };
 window.document.title = siteInfo.title;
@@ -20,6 +21,37 @@ mapEl.innerHTML = mapTemplate();
 
 const queryUrl = "http://localhost:3000/api/";
 
+let filters = [];
+
+
+let btnFilter = document.getElementById("filter").addEventListener("click", () => {
+    // console.log("filter buttom clicked")
+
+    let ageGroup = document.getElementById("age-group");
+
+    filters.push(ageGroup.value);
+
+    let allCheckbox = document.getElementsByClassName("form-check-input");
+    for (let i = 0; i < allCheckbox.length; i++) {
+        if (allCheckbox[i].checked) filters.push(allCheckbox[i].value);
+    }
+
+    console.log(filters)
+    filters = [];
+});
+
+
+let btnClear = document.getElementById("clear").addEventListener("click", () => {
+    // console.log("clear buttom clicked")
+    let allCheckbox = document.getElementsByClassName("form-check-input");
+    for (let i = 0; i < allCheckbox.length; i++) {
+        allCheckbox[i].checked = false;
+    }
+});
+
+
+
+
 
 let init = async function () {
     // Map.mapInit();
@@ -27,6 +59,10 @@ let init = async function () {
     // console.log(list);
     // Map.marks(list);
 };
+
+
+
+
 
 
 async function getAllLocations() {
