@@ -57,6 +57,7 @@ document.getElementById("clear").addEventListener("click", () => {
 
 
 let init = async function () {
+    Map.remove();
     Map.mapInit();
     let list = await getAllLocations(qString);
     // console.log(list);
@@ -73,11 +74,19 @@ async function getAllLocations(qString) {
         response = await (await fetch(queryString)).json();
     }
 
+    console.log(response[0]);
+
     let locationList = [];
 
     for (let i = 0; i < response.length; i++) {
-        locationList.push(response[i].geometry.coordinates);
+        locationList.push({
+            "name": response[i].properties.PARKNAME,
+            "address": response[i].properties.PARKADDRESS,
+            "coords": response[i].geometry.coordinates
+        });
     }
+
+    // console.log(locationList[1]);
 
     return locationList;
 }

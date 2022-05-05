@@ -21,17 +21,17 @@ Map.mapInit = async function () {
 
 Map.marks = async function (list) {
     let mark;
-    list.forEach((coords) => {
+    list.forEach((item) => {
         mark = new mapboxgl.Marker({
             color: "red",
         })
-            .setLngLat(coords)
-            .setPopup(new mapboxgl.Popup().setHTML("<h4>your friend is here</h4>"))
+            .setLngLat(item.coords)
+            .setPopup(new mapboxgl.Popup({
+                closeButton: false,
+            }).setHTML(`<p>${item.name}</p><p>${item.address}</p>`))
             .addTo(displayMap);
         marks.push(mark)
     });
-
-
 }
 
 Map.remove = async () => {
