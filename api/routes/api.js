@@ -18,10 +18,12 @@ router.get("/", async function (req, res, next) {
 
 // /options?:age_group&:climbing&:tire_swing&:swings_preschool_seats&:swings_belt_seats&:slides&:see_saw&:sand_box&:hopscotch&:playhouse&:spring_toy&:fencing&:accessible", 
 router.get("/options", async function (req, res, next) {
-
+  let playareaList
   let filters = req.query;
-  let playareaList = await PlayAreas.getList();
-
+  let checkResult = await DataCache.checkDataAge();
+  if (checkResult.status === "ready") {
+    playareaList = await PlayAreas.getList();
+  }
   // filter according to filters 
   playareaList = playareaList.filter((item) => {
     for (const props in filters) {

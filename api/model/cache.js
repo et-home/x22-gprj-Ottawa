@@ -8,6 +8,8 @@ DataCache.checkDataAge = async () => {
     let lastUpdateDate = await lastUpdate();
     let timeDiff = Math.floor((curDate - lastUpdateDate) / (1000 * 3600 * 24));
 
+    console.log(timeDiff);
+
     const updateInterval = 30; // define the update interval (in number of days) of database cashing;
 
     if (timeDiff > updateInterval || lastUpdateDate == null) {
@@ -17,16 +19,17 @@ DataCache.checkDataAge = async () => {
     else {
         return { "status": "ready" }; //data is still usable, no update needed
     }
-
     // return { "status": "ready" }
 }
 
 async function lastUpdate() {
 
     let dbConn = await dbcPool.getConnection();
-    const rows = await dbConn.query("SELECT playareas FROM playarea ORDER BY lastUpdated desc LIMIT 1"); //sort by last updated date in desc order and get the first result.
+    const row = await dbConn.query("SELECT lastUpdated FROM playarea ORDER BY lastUpdated desc LIMIT 1"); //sort by last updated date in desc order and get the first result.
     dbConn.end();
-    lastUpdated = rows.length == 0 ? null : rows[0].lastUpdated;
+    let lastUpdated = row.length == 0 ? null : row[0].lastUpdated;
+    // console.log(lastUpdated);
+
     return lastUpdated;
 }
 
