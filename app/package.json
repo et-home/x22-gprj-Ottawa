@@ -22,11 +22,11 @@
     "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
     "babel-loader": "^8.2.5",
-    "core-js": "^3.22.3",
+    "core-js": "^3.22.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.14.0",
     "handlebars": "^4.7.7",
-    "handlebars-loader": "^0.0.4",
+    "handlebars-loader": "^1.7.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"

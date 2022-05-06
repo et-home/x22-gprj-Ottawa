@@ -1,1 +1,89 @@
-<div>I am filters</div>
+<div class="card-group">
+    <div class="card">
+        <div class="card-body d-flex flex-column">
+            <label class="form-check-label">Age Group</label>
+            <select class="custom-select" id="age-group">
+                <option value="toddler">toddler</option>
+                <option value="junior">junior</option>
+                <option value="senior">senior</option>
+                <option value="all" selected="selected">all</option>
+            </select>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <label class="form-check-label">Tire Swing</label>
+                <input class="form-check-input" type="checkbox" value="TIRE_SWING"/>
+            </div>
+            <div>
+                <label class="form-check-label">Swings (preschool seats)</label>
+                <input class="form-check-input" type="checkbox" value="SWINGS_PRESCHOOL_SEATS"/>
+            </div>
+            <div>
+                <label class="form-check-label">Swings (belt seat)</label>
+                <input class="form-check-input" type="checkbox" value="SWINGS_BELT_SEATS"/>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <label class="form-check-label">Climbing</label>
+                <input class="form-check-input" type="checkbox" value="CLIMBING"/>
+            </div>
+            <div>
+                <label class="form-check-label">Slides</label>
+                <input class="form-check-input" type="checkbox" value="SLIDES"/>
+            </div>
+            <div>
+                <label class="form-check-label">Playhouse</label>
+                <input class="form-check-input" type="checkbox" value="PLAYHOUSE"/>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <label class="form-check-label">See Saw</label>
+                <input class="form-check-input" type="checkbox" value="SEE_SAW"/>
+            </div>
+            <div>
+                <label class="form-check-label">Sand Box</label>
+                <input class="form-check-input" type="checkbox" value="SAND_BOX"/>
+            </div>
+            <div>
+                <label class="form-check-label">Sprint Toy</label>
+                <input class="form-check-input" type="checkbox" value="SPRING_TOY"/>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <label class="form-check-label">Hopscotch</label>
+                <input class="form-check-input" type="checkbox" value="HOPSCOTCH"/>
+            </div>
+            <div>
+                <label class="form-check-label">Fencing</label>
+                <input class="form-check-input" type="checkbox" value="FENCING"/>
+            </div>
+            <div>
+                <label class="form-check-label">Accessible</label>
+                <input class="form-check-input" type="checkbox" value="ACCESSIBLE"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-10" ></div>
+        <div class="col-2"> 
+            <button type="button" class="btn btn-outline-success" id="filter">FILTER</button>
+            <button type="button" class="btn btn-outline-danger" id="clear">CLEAR</button>
+        </div>   
+            
+        </div>
+
+    </div>
+</div>

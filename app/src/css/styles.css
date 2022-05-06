@@ -1,0 +1,11 @@
+#weather-pane {
+    margin-bottom: 10px;
+}
+
+.miniweather {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(160, 160, 190);
+    border: 3px outset rgb(100, 100, 120);
+    border-radius: 3px;
+}
