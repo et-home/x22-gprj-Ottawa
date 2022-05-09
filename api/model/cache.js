@@ -24,7 +24,7 @@ DataCache.checkDataAge = async () => {
 async function lastUpdate() {
 
     let dbConn = await dbcPool.getConnection();
-    const rows = await dbConn.query("SELECT playareas FROM playarea ORDER BY lastUpdated desc LIMIT 1"); //sort by last updated date in desc order and get the first result.
+    const rows = await dbConn.query("SELECT lastUpdated FROM playarea ORDER BY lastUpdated desc LIMIT 1"); //sort by last updated date in desc order and get the first result.
     dbConn.end();
     lastUpdated = rows.length == 0 ? null : rows[0].lastUpdated;
     return lastUpdated;
